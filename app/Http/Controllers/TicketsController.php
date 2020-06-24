@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Client;
 use App\Http\Requests\StoreTicketRequest;
+use App\Notifications\TicketReassigned;
+use Illuminate\Support\Facades\Notification;
 use App\Mail\MyTicket;
 use App\State;
 use App\Ticket;
@@ -93,7 +95,8 @@ class TicketsController extends Controller
         $this->authorize('update', $ticket);
         $states = State::all();
         $clients = Client::all();
-        return view('tickets.edit', compact('ticket', 'states', 'clients'));
+        $users = User::all();
+        return view('tickets.edit',compact('ticket','states','clients', 'users'));
     }
 
     /**
@@ -108,12 +111,17 @@ class TicketsController extends Controller
         //$this->authorize('update-ticket', $ticket);
         $this->authorize('update', $ticket);
 
+        if($ticket->user_id != $request['user']) {
+            $user = User::find($request['user']);
+            $user->notify(new TicketReassigned($ticket['id']));
+        }
+        
         Ticket::where('id', $ticket['id'])->update([
             'title' => $request['title'],
             'body' => $request['body'],
             'state_id' => $request['state'],
             'client_id' => $request['client'],
-            'user_id' => auth()->user()->id
+            'user_id' => $request['user']
         ]);
 
         return redirect(route('tickets.show', $ticket))->with('success', 'Ticket updated!');

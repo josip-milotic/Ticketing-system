@@ -40,4 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/ajax/tickets', 'Search\SearchTicketsController@indexAjax');
     Route::get('/ajax/tickets/action', 'Search\SearchTicketsController@action')->name('ajax.search');
     Route::resource('tickets', 'TicketsController');
+
+
+    Route::get('notifications', 'UserNotificationsController@show')->name('notifications.show');
 });
+

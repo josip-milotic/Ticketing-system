@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
-use App\Http\Requests\StoreCommentRequest;
 use App\Ticket;
+use App\Http\Requests\StoreCommentRequest;
+use App\Notifications\NewComment;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 
 class CommentController extends Controller
 {
@@ -41,6 +44,13 @@ class CommentController extends Controller
      */
     public function store(StoreCommentRequest $request)
     {
+
+        $ticket = Ticket::find($request['ticket_id']);
+
+        if($ticket->user_id != auth()->user()->id) {
+            $ticket->user->notify(new NewComment($request['ticket_id']));
+        }
+        
         Comment::create([
             'comment' => request('comment'),
             'user_id' => auth()->user()->id,

@@ -89,6 +89,21 @@
                             </span>
                         @endif
 
+                        <div class="md-form">
+                            <select id="user"
+                                    class="browser-default custom-select m-2"
+                                    name="user">
+                                    <option value="{{$ticket->user->id}}" hidden>{{$ticket->user->name}}</option>
+                                @foreach($users as $user)
+                                    <option value="{{$user->id}}">{{$user->name}}</option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('user'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('user') }}</strong>
+                                </span>
+                            @endif
+
                     </div>
                     <div class="text-center pt-2">
                         <button class="btn btn-primary text-white " type="submit">Edit Ticket {{$ticket->id}}</button>

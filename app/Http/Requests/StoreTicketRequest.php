@@ -27,7 +27,8 @@ class StoreTicketRequest extends FormRequest
             'title'=>'required|max: 45',
             'body'=>'required|max: 255',
             'state'=>'required',
-            'client'=>'required'
+            'client'=>'required',
+            'user'=>'required|sometimes'
         ];
     }
 }
