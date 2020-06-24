@@ -44,6 +44,7 @@
                         <span class="invalid-feedback">{{$errors->first('name')}}</span>
                         @enderror
                     </div>
+
                     <div class="md-form 2">
                         <i class="fas fa-at prefix"></i>
                         <input type="email"
@@ -59,6 +60,7 @@
                         <span class="invalid-feedback">{{$errors->first('email')}}</span>
                         @enderror
                     </div>
+
                     <div class="md-form 2">
                         <i class="fas fa-address-card prefix"></i>
                         <input type="text"
@@ -73,8 +75,9 @@
                         <span class="help is-invalid">{{$errors->first('adress')}}</span>
                         @enderror
                     </div>
+
                     <div class="text-center pt-2">
-                    <button class="btn btn-primary text-white " type="submit">Edit Client {{$client->id}}</button>
+                        <button class="btn btn-primary text-white " type="submit">Edit Client {{$client->id}}</button>
                     </div>
                 </form>
             </div>

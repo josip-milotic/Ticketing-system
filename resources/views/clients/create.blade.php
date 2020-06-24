@@ -12,14 +12,14 @@
 
 @section('content')
 
-<div class="container pt-5">
-    <div class="row">
-    <div class="col align-self-center">
-        <h1 class="text-center">Create Client</h1>
-    </div>
-    </div>
-    <div class="row pt-5">
-        <div class="col-3"></div>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col align-self-center">
+                <h1 class="text-center">Create Client</h1>
+            </div>
+        </div>
+        <div class="row pt-5">
+            <div class="col-3"></div>
             <!-- Material input -->
             <div class="col-6">
                 <form method="POST" action="{{route('clients.store')}}">
@@ -72,15 +72,14 @@
 
                     </div>
                     <div class="text-center pt-2">
-                    <button class="btn btn-primary text-white text-center" type="submit">Create Client</button>
+                        <button class="btn btn-primary text-white text-center" type="submit">Create Client</button>
                     </div>
                 </form>
             </div>
-        <div class="col-3"></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="row pt-4">
+        </div>
     </div>
-    <div class="row pt-4">
-
-    </div>
-</div>
 
 @endsection

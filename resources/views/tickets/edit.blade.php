@@ -62,7 +62,7 @@
                         <select id="state"
                                 class="browser-default custom-select m-2"
                                 name="state">
-                                <option value="{{$ticket->state->id}}" hidden>{{$ticket->state->state}}</option>
+                            <option value="{{$ticket->state->id}}" hidden>{{$ticket->state->state}}</option>
                             @foreach($states as $state)
                                 <option value="{{$state->id}}">{{$state->state}}</option>
                             @endforeach
@@ -78,7 +78,7 @@
                         <select id="client"
                                 class="browser-default custom-select m-2"
                                 name="client">
-                                <option value="{{$ticket->client->id}}" hidden>{{$ticket->client->name}}</option>
+                            <option value="{{$ticket->client->id}}" hidden>{{$ticket->client->name}}</option>
                             @foreach($clients as $client)
                                 <option value="{{$client->id}}">{{$client->name}}</option>
                             @endforeach
@@ -106,7 +106,7 @@
 
                     </div>
                     <div class="text-center pt-2">
-                    <button class="btn btn-primary text-white " type="submit">Edit Ticket {{$ticket->id}}</button>
+                        <button class="btn btn-primary text-white " type="submit">Edit Ticket {{$ticket->id}}</button>
                     </div>
                 </form>
             </div>

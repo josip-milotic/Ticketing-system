@@ -1,8 +1,9 @@
 <?php
 
+use App\Role;
 use Illuminate\Database\Seeder;
 
-class ClientSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +12,7 @@ class ClientSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Client::class, 1000)->create()->each(function ($client) {
+        factory(Role::class, 2)->create()->each(function ($role) {
         });
     }
 }

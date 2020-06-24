@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreStateRequest;
 use App\State;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreStateRequest;
+use Illuminate\Http\Response;
 
 class StatesController extends Controller
 {
@@ -17,15 +18,14 @@ class StatesController extends Controller
     {
         $states = State::all();
 
-
-        return view('states.index',compact('states'));
+        return view('states.index', compact('states'));
 
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -36,7 +36,7 @@ class StatesController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *  @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      *  return \Illuminate\Http\Response
      */
     public function store(StoreStateRequest $request)
@@ -58,7 +58,7 @@ class StatesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\State  $state
+     * @param State $state
      * return \Illuminate\Http\Response
      */
     public function show(State $state)
@@ -71,7 +71,7 @@ class StatesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\State  $state
+     * @param State $state
      * return \Illuminate\Http\Response
      */
     public function edit(State $state)
@@ -79,14 +79,14 @@ class StatesController extends Controller
         $this->authorize('admin', $state);
 
         //$state = State::findOrFail($id);
-        return view('states.edit',compact('state'));
+        return view('states.edit', compact('state'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * param  \Illuminate\Http\Request  $request
-     * @param  \App\State  $state
+     * @param State $state
      * return \Illuminate\Http\Response
      */
     public function update(State $state, StoreStateRequest $request)
@@ -108,7 +108,7 @@ class StatesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\State  $state
+     * @param State $state
      * return \Illuminate\Http\Response
      */
     public function destroy(State $state)

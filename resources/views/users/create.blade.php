@@ -11,14 +11,14 @@
 @endsection
 
 @section('content')
-<div class="container pt-5">
-    <div class="row">
-        <div class="col align-self-center">
-            <h1 class="text-center">Create user</h1>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col align-self-center">
+                <h1 class="text-center">Create user</h1>
+            </div>
         </div>
-    </div>
-    <div class="row pt-5">
-        <div class="col-3"></div>
+        <div class="row pt-5">
+            <div class="col-3"></div>
             <div class="col-6">
                 <form method="POST" action="{{ route('users.store') }}">
                     @csrf
@@ -33,7 +33,7 @@
                         <label for="name">Name</label>
 
                         @error('name')
-                            <span class="invalid-feedback">{{ $errors->first('name') }}</span>
+                        <span class="invalid-feedback">{{ $errors->first('name') }}</span>
                         @enderror
                     </div>
 
@@ -47,7 +47,7 @@
                         <label for="username">Userame</label>
 
                         @error('username')
-                            <span class="invalid-feedback">{{ $errors->first('username') }}</span>
+                        <span class="invalid-feedback">{{ $errors->first('username') }}</span>
                         @enderror
                     </div>
 
@@ -75,17 +75,33 @@
                         <label for="password">Password</label>
 
                         @error('password')
-                            <span class="invalid-feedback">{{ $errors->first('password') }}</span>
+                        <span class="invalid-feedback">{{ $errors->first('password') }}</span>
                         @enderror
                     </div>
+
+                    <div class="md-form 2">
+                        <select id="role"
+                                class="browser-default custom-select"
+                                name="role" required>
+                            <option value="" hidden>Role</option>
+                            @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->role}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('role'))
+                            <span class="invalid-feedback">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                        @endif
+                    </div>
                     <div class="text-center pt-2">
-                    <button class="btn btn-primary text-white " type="submit">Create User</button>
+                        <button class="btn btn-primary text-white " type="submit">Create User</button>
                     </div>
                 </form>
             </div>
-        <div class="col-3"></div>
+            <div class="col-3"></div>
+        </div>
+        <div class="row pt-4">
+        </div>
     </div>
-    <div class="row pt-4">
-    </div>
-</div>
 @endsection

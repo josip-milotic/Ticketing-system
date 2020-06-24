@@ -2,20 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Ticket;
 use App\Comment;
-use Illuminate\Http\Request;
+use App\Ticket;
 use App\Http\Requests\StoreCommentRequest;
 use App\Notifications\NewComment;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -27,7 +28,7 @@ class CommentController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -38,8 +39,8 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(StoreCommentRequest $request)
     {
@@ -56,14 +57,14 @@ class CommentController extends Controller
             'ticket_id' => request('ticket_id')
         ]);
 
-        return redirect(route('tickets.show', $request->ticket_id))->with('success', 'Comment stored!');;
+        return redirect(route('tickets.show', $request->ticket_id))->with('success', 'Comment stored!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return Response
      */
     public function show(Comment $comment)
     {
@@ -73,25 +74,25 @@ class CommentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return Response
      */
     public function edit(Comment $comment)
     {
-        $this->authorize('update',$comment);
+        $this->authorize('update', $comment);
         return view('comments.edit', compact('comment'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Comment $comment
+     * @return Response
      */
     public function update(StoreCommentRequest $request, Comment $comment)
     {
-        $this->authorize('update',$comment);
+        $this->authorize('update', $comment);
         Comment::where('id', $comment['id'])->update([
             'comment' => $request['comment']
         ]);
@@ -102,12 +103,12 @@ class CommentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
+     * @param Comment $comment
+     * @return Response
      */
     public function destroy(Comment $comment)
     {
-        $this->authorize('delete',$comment);
+        $this->authorize('delete', $comment);
         $comment->delete();
 
         return redirect(route('tickets.show', $comment->ticket_id))->with('success', 'Comment deleted!');

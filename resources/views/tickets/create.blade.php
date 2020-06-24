@@ -75,11 +75,11 @@
                                 class="browser-default custom-select m-2"
                                 name="client" required>
                             @if($client==null)
-                                <option hidden >Client</option>
+                                <option hidden>Client</option>
                                 @foreach($clients as $client)
-                                <option value="{{$client->id}}">{{$client->name}}</option>
+                                    <option value="{{$client->id}}">{{$client->name}}</option>
                                 @endforeach
-                                @else
+                            @else
                                 <option value="{{$client->id}}">{{$client->name}}</option>
                             @endif
                         </select>
@@ -92,7 +92,7 @@
                     </div>
 
                     <div class="text-center pt-2">
-                    <button class="btn btn-primary text-white " type="submit">Create Ticket</button>
+                        <button class="btn btn-primary text-white " type="submit">Create Ticket</button>
                     </div>
                 </form>
             </div>

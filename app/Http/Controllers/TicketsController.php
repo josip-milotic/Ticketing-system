@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Ticket;
-use App\State;
-use App\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\StoreTicketRequest;
 use App\Notifications\TicketReassigned;
 use Illuminate\Support\Facades\Notification;
+use App\Mail\MyTicket;
+use App\State;
+use App\Ticket;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 
 class TicketsController extends Controller
 {
@@ -21,28 +22,29 @@ class TicketsController extends Controller
     public function index()
     {
 
+        $states = State::all();
         $tickets = Ticket::latest('created_at')->paginate(10);
 
-
-        return view ('tickets.index', compact('tickets'));
+        return view('tickets.index', compact('tickets', 'states'));
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * return \Illuminate\Http\Response
      */
-    public function create($client=null)
+    public function create($client = null)
     {
-        $states =State::all();
+        $states = State::all();
 
-        if ($client){
+        if ($client != null) {
             $client = Client::findOrFail($client);
-            return view('tickets.create',compact('states','client'));
-        }else{
-            $clients =Client::all();
-            $client=null;
-            return view('tickets.create',compact('states','clients','client'));
+            return view('tickets.create', compact('states', 'client'));
+        } else {
+            $clients = Client::all();
+            $client = null;
+            return view('tickets.create', compact('states', 'clients', 'client'));
         }
 
     }
@@ -63,13 +65,17 @@ class TicketsController extends Controller
             'user_id' => auth()->user()->id
         ]);
 
+        $client = Client::where('id', '=', $request['client'])->pluck('email');
+
+        Mail::to($client)->send(new MyTicket($request));
+
         return redirect(route('tickets.index'))->with('success', 'Ticket created!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Ticket  $ticket
+     * @param Ticket $ticket
      * return \Illuminate\Http\Response
      */
     public function show(Ticket $ticket)
@@ -81,8 +87,8 @@ class TicketsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Ticket  $ticket
-     * @return \Illuminate\Http\Response
+     * @param Ticket $ticket
+     * @return Response
      */
     public function edit(Ticket $ticket)
     {
@@ -117,14 +123,14 @@ class TicketsController extends Controller
             'client_id' => $request['client'],
             'user_id' => $request['user']
         ]);
- 
-        return redirect(route('tickets.show',$ticket))->with('success', 'Ticket updated!');
+
+        return redirect(route('tickets.show', $ticket))->with('success', 'Ticket updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Ticket  $ticket
+     * @param Ticket $ticket
      * return \Illuminate\Http\Response
      */
     public function destroy(Ticket $ticket)

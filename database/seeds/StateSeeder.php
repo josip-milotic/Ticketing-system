@@ -11,7 +11,7 @@ class StateSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\State::class, 4)->create()->each(function ($user) {
+        factory(App\State::class, 4)->create()->each(function ($state) {
         });
     }
 }

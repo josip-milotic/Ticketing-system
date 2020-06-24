@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('linked')
-    <span><a href="{{route('states.create')}}">Create State</a></span>
+    <span><a href="{{route('roles.create')}}">Create Role</a></span>
 @endsection
 
 @section('button')
@@ -15,32 +15,32 @@
     <div class="container p-5">
         <div class="row">
             <div class="col align-self-center">
-                <h1 class="text-center">Create State</h1>
+                <h1 class="text-center">Create Role</h1>
             </div>
         </div>
         <div class="row pt-5">
             <div class="col-3"></div>
             <!-- Material input -->
             <div class="col-6">
-                <form method="POST" action="{{route('states.store')}}">
+                <form method="POST" action="{{route('roles.store')}}">
                     @csrf
 
                     <div class="md-form 2">
                         <i class="fas fa-cog prefix"></i>
                         <input type="text"
-                               id="state"
-                               name="state"
-                               class="form-control @error('state') is-invalid @enderror"
+                               id="role"
+                               name="role"
+                               class="form-control @error('role') is-invalid @enderror"
                                required
-                               value="{{old('state')}}">
-                        <label for="state">State</label>
+                               value="{{old('role')}}">
+                        <label for="role">Role</label>
 
-                        @error('state')
-                        <span class="invalid-feedback">{{$errors->first('state')}}</span>
+                        @error('role')
+                        <span class="invalid-feedback">{{$errors->first('role')}}</span>
                         @enderror
                     </div>
                     <div class="text-center pt-2">
-                        <button class="btn btn-primary text-white text-center " type="submit">Create State</button>
+                        <button class="btn btn-primary text-white text-center " type="submit">Create Role</button>
                     </div>
                 </form>
             </div>

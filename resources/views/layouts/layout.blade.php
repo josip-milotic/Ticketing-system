@@ -13,30 +13,33 @@
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="{{asset('css/mdb.min.css')}}" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
+    <!-- https://drive.google.com/file/d/1pAYFge4T3gbIcFaovKSjRw_yGYh6W7sm/view?usp=sharing-->
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
 
     <link href="{{asset('css/style.css')}}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://raw.githubusercontent.com/ysoftaoglu/GradientButtons/master/gradient-buttons/gradient-buttons.min.css"/>
+    <link rel="stylesheet"
+          href="https://raw.githubusercontent.com/ysoftaoglu/GradientButtons/master/gradient-buttons/gradient-buttons.min.css"/>
 
     <style>
 
-        .map-container{
-            overflow:hidden;
-            padding-bottom:56.25%;
-            position:relative;
-            height:0;
+        .map-container {
+            overflow: hidden;
+            padding-bottom: 56.25%;
+            position: relative;
+            height: 0;
         }
-        .map-container iframe{
-            left:0;
-            top:0;
-            height:100%;
-            width:100%;
-            position:absolute;
+
+        .map-container iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
         }
+
         html, body {
             background-color: #fafafa;
             color: #636b6f;
@@ -87,7 +90,8 @@
         .m-b-md {
             margin-bottom: 30px;
         }
-        .t{
+
+        .t {
             min-height: 80%;
         }
     </style>
@@ -103,27 +107,28 @@
         <div class="container-fluid">
         @guest
             <!-- Brand -->
-            <a class="navbar-brand waves-effect" href="{{route('home')}}">
-                <strong class="text-white">Ticketing System</strong>
-            </a>
+                <a class="navbar-brand waves-effect" href="{{route('home')}}">
+                    <strong class="text-white">Ticketing System</strong>
+                </a>
 
-            <!-- Collapse -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- Collapse -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Links -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                <!-- Left -->
+                    <!-- Left -->
 
                     <ul class="navbar-nav mr-auto">
-                    <li class="nav-item {{Request::path() === '/home' ? 'active' : ''}}">
-                        <a class="nav-link waves-effect" href="{{route('home')}}">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
+                        <li class="nav-item {{Request::path() === '/home' ? 'active' : ''}}">
+                            <a class="nav-link waves-effect" href="{{route('home')}}">Home
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
                     </ul>
                 @else
                     <!-- Brand -->
@@ -134,19 +139,19 @@
                 @endguest
 
                 <!-- Right -->
-                <ul class="navbar-nav ml-auto right">
-                    <!-- Authentication Links -->
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
+                    <ul class="navbar-nav ml-auto right">
+                        <!-- Authentication Links -->
+                        @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                        @endif
-                    @else
-                        <li class="nav-item">
+                            @if (Route::has('register'))
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                </li>
+                            @endif
+                        @else
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('users.show',auth()->user()) }}">
                                     My profile
                                 </a>
@@ -155,28 +160,30 @@
                             <a class="nav-link" href="{{ route('notifications.show') }}">
                                 Notifications
                             </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
+                         </li>
+                         <li class="nav-item dropdown">
+                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" 
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}"
+                                       onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                                        {{ __('Logout') }}
+                                    </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
 
-                        </li>
-                    @endguest
-                </ul>
-            </div>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
         </div>
     </nav>
     <!-- Navbar -->
@@ -185,9 +192,9 @@
     <div class="sidebar-fixed position-fixed">
 
         @guest
-        <a class="logo-wrapper waves-effect" href="{{route('home')}}">
-            <img src="{{asset('img/unnamed.png')}}" class="img-fluid" alt="">
-        </a>
+            <a class="logo-wrapper waves-effect" href="{{route('home')}}">
+                <img src="{{asset('img/unnamed.png')}}" class="img-fluid" alt="">
+            </a>
 
         @else
 
@@ -195,74 +202,124 @@
                 <img src="{{asset('img/unnamed.png')}}" class="img-fluid" alt="">
             </a>
 
-        <div class="list-group list-group-flush">
-            <a href="{{route('home')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('home') ? 'active' : ''}}">
-                <i class="fas fa-chart-pie mr-3"></i>Home
-            </a>
-            @if(auth()->user()->role =='user')
-            <a href="{{route('clients.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('clients.index') ? 'active' : ''}}">
-                <i class="fas fa-ticket-alt mr-3 "></i>Clients</a>
+            <div class="list-group list-group-flush">
+                <a href="{{route('home')}}"
+                   class="list-group-item list-group-item-action waves-effect {{Route::is('home') ? 'active' : ''}}">
+                    <i class="fas fa-chart-pie mr-3"></i>Home
+                </a>
+                @if(auth()->user()->role_id =='2')
+                    <a href="{{route('clients.index')}}"
+                       class="list-group-item list-group-item-action waves-effect {{Route::is('clients.index') ? 'active' : ''}}">
+                        <i class="fas fa-ticket-alt mr-3 "></i>Clients</a>
 
-            <a href="{{route('tickets.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('tickets.index') ? 'active' : ''}}">
-                <i class="fas fa-clipboard-list mr-3 "></i>Tickets</a>
+                    <a href="{{route('tickets.index')}}"
+                       class="list-group-item list-group-item-action waves-effect {{Route::is('tickets.index') ? 'active' : ''}}">
+                        <i class="fas fa-clipboard-list mr-3 "></i>Tickets</a>
 
-            <a href="{{route('comments.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('comments.index') ? 'active' : ''}}">
-                <i class="fas fa-comment-dots mr-3 "></i>Comments</a>
+                    <a href="{{route('comments.index')}}"
+                       class="list-group-item list-group-item-action waves-effect {{Route::is('comments.index') ? 'active' : ''}}">
+                        <i class="fas fa-comment-dots mr-3 "></i>Comments</a>
 
-            <a href="{{route('states.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('states.index') ? 'active' : ''}}">
-                <i class="fas fa-satellite mr-3 "></i>States</a>
-            @endif
-            @if(auth()->user()->role =='admin')
+                    <a href="{{route('states.index')}}"
+                       class="list-group-item list-group-item-action waves-effect {{Route::is('states.index') ? 'active' : ''}}">
+                        <i class="fas fa-satellite mr-3 "></i>States</a>
+                @endif
+                @if(auth()->user()->role_id =='1')
 
-                <a href="#client" class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('clients.index','clients.create','clients.show','clients.edit') ? 'active' : ''}}" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-ticket-alt mr-3"></i>Clients</a>
+                    <a href="#client"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('clients.index','clients.create','clients.show','clients.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-ticket-alt mr-3"></i>Clients</a>
 
-                <ul class="collapse list-unstyled" id="client">
-                    <li> <a href="{{route('clients.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('clients.index') ? 'active' : ''}}">View Clients</a></li>
-                    <li> <a href="{{route('clients.create')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('clients.create') ? 'active' : ''}}">Create Client</a></li>
-                </ul>
-
-
-                <a href="#ticket" class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('tickets.index','tickets.create','tickets.show','tickets.edit') ? 'active' : ''}}" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-clipboard-list mr-3"></i>Tickets</a>
-
-
-                <ul class="collapse list-unstyled" id="ticket">
-                    <li> <a href="{{route('tickets.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('tickets.index') ? 'active' : ''}}">View Tickets</a></li>
-                    <li><a href="{{route('tickets.create')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('tickets.create') ? 'active' : ''}}">Create Ticket</a></li>
-                </ul>
-
-
-                <a href="#comment" class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('comments.index','comments.create','comments.show','comments.edit') ? 'active' : ''}}" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-comment-dots mr-3"></i>Comments</a>
+                    <ul class="collapse list-unstyled" id="client">
+                        <li><a href="{{route('clients.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('clients.index') ? 'active' : ''}}">View
+                                Clients</a></li>
+                        <li><a href="{{route('clients.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('clients.create') ? 'active' : ''}}">Create
+                                Client</a></li>
+                    </ul>
 
 
-                <ul class="collapse list-unstyled" id="comment">
-                    <li><a href="{{route('comments.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('comments.index') ? 'active' : ''}}">View Comments</a></li>
-                    <li><a href="{{route('comments.create')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('comments.create') ? 'active' : ''}}">Create Comment</a></li>
-                </ul>
-
-                <a href="#state" class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('states.index','states.create','states.show','states.edit') ? 'active' : ''}}" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-satellite mr-3"></i>States</a>
+                    <a href="#ticket"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('tickets.index','tickets.create','tickets.show','tickets.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-clipboard-list mr-3"></i>Tickets</a>
 
 
-                <ul class="collapse list-unstyled" id="state">
-                    <li><a href="{{route('states.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('states.index') ? 'active' : ''}}">View States</a></li>
-                    <li><a href="{{route('states.create')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('states.create') ? 'active' : ''}}">Create State</a></li>
-                </ul>
-
-                <a href="#user" class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('users.index','users.create','users.show','users.edit') ? 'active' : ''}}" data-toggle="collapse" aria-expanded="false">
-                    <i class="fas fa-user mr-3"></i>Users</a>
-
-
-                <ul class="collapse list-unstyled" id="user">
-                    <li><a href="{{route('users.index')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('users.index') ? 'active' : ''}}"> View Users</a></li>
-                    <li><a href="{{route('users.create')}}" class="list-group-item list-group-item-action waves-effect {{Route::is('users.create') ? 'active' : ''}}">Create User</a></li>
-                </ul>
+                    <ul class="collapse list-unstyled" id="ticket">
+                        <li><a href="{{route('tickets.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('tickets.index') ? 'active' : ''}}">View
+                                Tickets</a></li>
+                        <li><a href="{{route('tickets.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('tickets.create') ? 'active' : ''}}">Create
+                                Ticket</a></li>
+                    </ul>
 
 
-            @endif
-        </div>
+                    <a href="#comment"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('comments.index','comments.create','comments.show','comments.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-comment-dots mr-3"></i>Comments</a>
+
+
+                    <ul class="collapse list-unstyled" id="comment">
+                        <li><a href="{{route('comments.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('comments.index') ? 'active' : ''}}">View
+                                Comments</a></li>
+                        <li><a href="{{route('comments.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('comments.create') ? 'active' : ''}}">Create
+                                Comment</a></li>
+                    </ul>
+
+                    <a href="#state"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('states.index','states.create','states.show','states.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-satellite mr-3"></i>States</a>
+
+
+                    <ul class="collapse list-unstyled" id="state">
+                        <li><a href="{{route('states.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('states.index') ? 'active' : ''}}">View
+                                States</a></li>
+                        <li><a href="{{route('states.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('states.create') ? 'active' : ''}}">Create
+                                State</a></li>
+                    </ul>
+
+                    <a href="#role"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('roles.index','roles.create','roles.show','roles.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-satellite mr-3"></i>Roles</a>
+
+
+                    <ul class="collapse list-unstyled" id="role">
+                        <li><a href="{{route('roles.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('roles.index') ? 'active' : ''}}">View
+                                Roles</a></li>
+                        <li><a href="{{route('roles.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('roles.create') ? 'active' : ''}}">Create
+                                Roles</a></li>
+                    </ul>
+
+                    <a href="#user"
+                       class="list-group-item list-group-item-action waves-effect dropdown-toggle {{Route::is('users.index','users.create','users.show','users.edit') ? 'active' : ''}}"
+                       data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-user mr-3"></i>Users</a>
+
+
+                    <ul class="collapse list-unstyled" id="user">
+                        <li><a href="{{route('users.index')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('users.index') ? 'active' : ''}}">
+                                View Users</a></li>
+                        <li><a href="{{route('users.create')}}"
+                               class="list-group-item list-group-item-action waves-effect border-0 {{Route::is('users.create') ? 'active' : ''}}">Create
+                                User</a></li>
+                    </ul>
+
+
+                @endif
+            </div>
 
         @endguest
     </div>
@@ -289,7 +346,7 @@
                 </h4>
                 <div class="row">
 
-                @yield('button')
+                    @yield('button')
                 </div>
 
             </div>
@@ -299,7 +356,7 @@
 
     @yield('auth')
 
-        <!--Grid row-->
+    <!--Grid row-->
         <div class="row wow fadeIn">
 
             <!--Grid column-->
@@ -380,6 +437,29 @@
 <script type="text/javascript">
     // Animations initialization
     new WOW().init();
+
+    $(document).ready(function () {
+
+        fetch_customer_data();
+
+        function fetch_customer_data(query = '') {
+            $.ajax({
+                url: "{{ route('ajax.search') }}",
+                method: 'GET',
+                data: {query: query},
+                dataType: 'json',
+                success: function (data) {
+                    $('tbody').html(data.table_data);
+                    $('#total_records').text(data.total_data);
+                }
+            })
+        }
+
+        $(document).on('keyup', '#search', function () {
+            var query = $(this).val();
+            fetch_customer_data(query);
+        });
+    });
 
 </script>
 

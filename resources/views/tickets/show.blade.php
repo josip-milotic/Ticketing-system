@@ -102,14 +102,14 @@
 
         </div>
         <div class="pl-4 pr-4">
-        <div class="col align-self-center" style="margin-top: 40px">
-            <h1>Comments</h1>
-        </div>
-        <div class="col-sm-8">
-            <form method="POST" action="{{ route('comments.store') }}">
-                @csrf
+            <div class="col align-self-center" style="margin-top: 40px">
+                <h1>Comments</h1>
+            </div>
+            <div class="col-sm-8">
+                <form method="POST" action="{{ route('comments.store') }}">
+                    @csrf
 
-                <div class="md-form 2 p-0 m-0">
+                    <div class="md-form 2 p-0 m-0">
                             <textarea id="comment"
                                       name="comment"
                                       class="md-textarea md-textarea-auto form-control
@@ -117,53 +117,54 @@
                                       style="resize: none"
                                       rows="2"
                                       style="width: 100%"></textarea>
-                    <label for="comment">Leave a comment</label>
+                        <label for="comment">Leave a comment</label>
 
-                    @error('comment')
-                    <p class="help is-danger">{{ $errors->first('comment') }}</p>
-                    @enderror
-                </div>
-                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}"/>
-                <input type="hidden" name="user_id" value="{{ $ticket->user_id }}"/>
-                <button class="btn btn-primary text-white " type="submit">Add Comment</button>
+                        @error('comment')
+                        <p class="help is-danger">{{ $errors->first('comment') }}</p>
+                        @enderror
+                    </div>
+                    <input type="hidden" name="ticket_id" value="{{ $ticket->id }}"/>
+                    <input type="hidden" name="user_id" value="{{ $ticket->user_id }}"/>
+                    <button class="btn btn-primary text-white " type="submit">Add Comment</button>
 
-            </form>
-        </div>
+                </form>
+            </div>
         </div>
         <div class="p-4">
-        @foreach ($ticket->comments as $comment)
-            <div class="p-2">
-                <div class="card">
-                    <div class="card-header">
-                        {{ $comment->user->name }}
-                        <span style="float: right">
+            @foreach ($ticket->comments as $comment)
+                <div class="p-2">
+                    <div class="card">
+                        <div class="card-header">
+                            {{ $comment->user->name }}
+                            <span style="float: right">
                             {{ $comment->updated_at }}
                         </span>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">{{ $comment->comment }}</p>
-                        <div>
-                            @can('update',$comment)
-                            <form method="POST" action="{{route('comments.destroy', $comment->id)}}">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" style="float: right; margin-left: 5px" class="btn red lighten-1 text-white btn-sm">
-                                    Delete
-                                </button>
-                            </form>
-                            @endcan
-                            @can('delete',$comment)
-                            <form method="GET" action="{{route('comments.edit', $comment->id)}}">
-                                <button type="submit" style="float: right; margin-left: 5px"
-                                        class="btn btn-light-green btn-sm">Edit
-                                </button>
-                            </form>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ $comment->comment }}</p>
+                            <div>
+                                @can('update',$comment)
+                                    <form method="POST" action="{{route('comments.destroy', $comment->id)}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" style="float: right; margin-left: 5px"
+                                                class="btn red lighten-1 text-white btn-sm">
+                                            Delete
+                                        </button>
+                                    </form>
                                 @endcan
+                                @can('delete',$comment)
+                                    <form method="GET" action="{{route('comments.edit', $comment->id)}}">
+                                        <button type="submit" style="float: right; margin-left: 5px"
+                                                class="btn btn-light-green btn-sm">Edit
+                                        </button>
+                                    </form>
+                                @endcan
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
         </div>
         <div class="col-sm-12 p-4">
             @if(session()->get('success'))

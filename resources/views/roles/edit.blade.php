@@ -1,9 +1,9 @@
 @extends('layouts.layout')
 
 @section('linked')
-    <span><a href="{{route('states.index')}}">States</a></span>
+    <span><a href="{{route('roles.index')}}">Roles</a></span>
     <span> / </span>
-    <span><a href="{{route('states.show',$state)}}">State {{$state->id}} - {{$state->state}}</a></span>
+    <span><a href="{{route('roles.show',$role)}}">Role {{$role->id}} - {{$role->role}}</a></span>
     <span> / </span>
     <span>Edit</span>
 @endsection
@@ -19,33 +19,33 @@
     <div class="container pt-5">
         <div class="row">
             <div class="col align-self-center">
-                <h1 class="text-center">Edit State {{$state->id}}</h1>
+                <h1 class="text-center">Edit Role {{$role->id}}</h1>
             </div>
         </div>
         <div class="row pt-5">
             <div class="col-3"></div>
             <!-- Material input -->
             <div class="col-6">
-                <form method="POST" action="{{route('states.update',$state)}}">
+                <form method="POST" action="{{route('roles.update',$role)}}">
                     @csrf
                     @method('PUT')
 
                     <div class="md-form 2">
                         <i class="fas fa-cog prefix"></i>
                         <input type="text"
-                               id="state"
-                               name="state"
-                               value="{{$state->state}}"
-                               class="form-control @error('state') is-invalid @enderror"
+                               id="role"
+                               name="role"
+                               value="{{$role->role}}"
+                               class="form-control @error('rolee') is-invalid @enderror"
                                required>
-                        <label for="state">State</label>
+                        <label for="role">Role</label>
 
-                        @error('state')
-                        <span class="invalid-feedback">{{$errors->first('state')}}</span>
+                        @error('role')
+                        <span class="invalid-feedback">{{$errors->first('role')}}</span>
                         @enderror
                     </div>
                     <div class="text-center pt-2">
-                        <button class="btn btn-primary text-white " type="submit">Edit State {{$state->id}}</button>
+                        <button class="btn btn-primary text-white " type="submit">Edit Role {{$role->id}}</button>
                     </div>
                 </form>
             </div>

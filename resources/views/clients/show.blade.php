@@ -1,7 +1,8 @@
 @extends('layouts.layout')
 
 @section('linked')
-    <span><a href="{{route('clients.index')}}">Clients</a></span><span> / </span><span>Client {{$client->id}} - {{$client->name}}</span>
+    <span><a href="{{route('clients.index')}}">Clients</a></span><span> / </span>
+    <span>Client {{$client->id}} - {{$client->name}}</span>
 @endsection
 
 @section('button')
@@ -31,27 +32,27 @@
             </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="text-center">{{$client->name}}</td>
-                    <td class="text-center">{{$client->email}}</td>
-                    <td class="text-center">{{$client->adress}}</td>
-                    <td class="text-center">
-                        <a class="text-white" href="{{route('clients.edit',$client)}}">
-                            <button type="button" class="btn btn-light-green btn-sm m-0">Edit</button>
-                        </a>
-                    </td>
-                    <td class="text-center">
-                        @can('admin',$client)
+            <tr>
+                <td class="text-center">{{$client->name}}</td>
+                <td class="text-center">{{$client->email}}</td>
+                <td class="text-center">{{$client->adress}}</td>
+                <td class="text-center">
+                    <a class="text-white" href="{{route('clients.edit',$client)}}">
+                        <button type="button" class="btn btn-light-green btn-sm m-0">Edit</button>
+                    </a>
+                </td>
+                <td class="text-center">
+                    @can('admin',$client)
                         <form method="POST" action="{{route('clients.destroy',$client)}}">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn red lighten-1 text-white btn-sm m-0">Delete</button>
                         </form>
-                        @else
-                            <a class="text-center">Forbidden</a>
-                        @endcan
-                    </td>
-                </tr>
+                    @else
+                        <a class="text-center">Forbidden</a>
+                    @endcan
+                </td>
+            </tr>
             </tbody>
         </table>
         <div class="col-sm-12 p-4">

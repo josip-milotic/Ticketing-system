@@ -44,13 +44,13 @@ class AuthServiceProvider extends ServiceProvider
 
 
         Gate::before(function (User $user){
-            if ($user->role=='admin'){
+            if ($user->role_id=='1'){
                 return true;
             }
     });
 
-        Gate::define('admin',function (User $user){
-            if ($user->role=='admin'){
+        Gate::define('1',function (User $user){
+            if ($user->role_id=='1'){
                 return true;
             }
         });

@@ -1,14 +1,15 @@
 @extends('layouts.layout')
 
 @section('linked')
-    <span><a href="{{route('users.index')}}">Users</a></span><span> / </span><span>User {{$user->id}} - {{$user->name}}</span>
+    <span><a href="{{route('users.index')}}">Users</a></span><span> / </span>
+    <span>User {{$user->id}} - {{$user->name}}</span>
 @endsection
 
 @section('button')
     @can('admin')
-    <a class="text-white d-flex" href="{{route('users.create')}}">
-        <button class="btn btn-primary btn-sm my-0 p">Create User</button>
-    </a>
+        <a class="text-white d-flex" href="{{route('users.create')}}">
+            <button class="btn btn-primary btn-sm my-0 p">Create User</button>
+        </a>
     @endcan
     <a class="text-white d-flex" href="{{route('home')}}">
         <button class="btn btn-amber btn-sm my-0 p">Home</button>
@@ -46,11 +47,11 @@
                 </td>
                 <td class="text-center">
                     @can('admin',$user)
-                    <form method="POST" action="{{route('users.destroy',$user)}}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn red lighten-1 text-white btn-sm m-0">Delete</button>
-                    </form>
+                        <form method="POST" action="{{route('users.destroy',$user)}}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn red lighten-1 text-white btn-sm m-0">Delete</button>
+                        </form>
                     @else
                         <a class="text-center">Forbidden</a>
                     @endcan

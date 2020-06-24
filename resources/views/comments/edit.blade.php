@@ -15,42 +15,41 @@
 @endsection
 
 @section('content')
-<div class="container pt-5">
-    <div class="row">
-        <div class="col align-self-center">
-            <h1 class="text-center">Edit a comment {{$comment->id}}</h1>
+    <div class="container pt-5">
+        <div class="row">
+            <div class="col align-self-center">
+                <h1 class="text-center">Edit a comment {{$comment->id}}</h1>
+            </div>
         </div>
-    </div>
-    <div class="row pt-5 pl-5">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <form method="POST" action="{{ route('comments.update', $comment) }}">
-                @csrf
-                @method('PUT')
+        <div class="row pt-5 pl-5">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <form method="POST" action="{{ route('comments.update', $comment) }}">
+                    @csrf
+                    @method('PUT')
 
-                <div class="md-form 2">
+                    <div class="md-form 2">
                     <textarea id="comment"
-                    name="comment"
-                    class="md-textarea md-textarea-auto form-control
+                              name="comment"
+                              class="md-textarea md-textarea-auto form-control
                     @error('comment') is-invalid @enderror"
-                    style="resize: none"
-                    rows="4"
-                    cols="50" required>{{ $comment->comment }}</textarea>
-                    <label for="comment">Comment</label>
+                              style="resize: none"
+                              rows="4"
+                              cols="50" required>{{ $comment->comment }}</textarea>
+                        <label for="comment">Comment</label>
 
-                    @error('comment')
+                        @error('comment')
                         <span class="invalid-feedback">{{ $errors->first('comment') }}</span>
-                    @enderror
-                </div>
-                <div class="text-center pt-2">
-                <button class="btn btn-primary text-white " type="submit">Edit Comment</button>
-                </div>
-            </form>
+                        @enderror
+                    </div>
+                    <div class="text-center pt-2">
+                        <button class="btn btn-primary text-white " type="submit">Edit Comment</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-3"></div>
         </div>
-        <div class="col-3"></div>
+        <div class="row pt-4">
+        </div>
     </div>
-    <div class="row pt-4">
-
-    </div>
-</div>
 @endsection

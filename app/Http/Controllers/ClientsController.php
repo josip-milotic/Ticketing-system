@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreClientRequest;
 
 class ClientsController extends Controller
@@ -18,7 +16,7 @@ class ClientsController extends Controller
     {
         $clients = Client::latest('created_at')->paginate(10);
 
-        return view('clients.index',compact('clients'));
+        return view('clients.index', compact('clients'));
 
     }
 
@@ -52,7 +50,7 @@ class ClientsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param Client $client
      * return \Illuminate\Http\Response
      */
     public function show(Client $client)
@@ -64,20 +62,20 @@ class ClientsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Client  $client
+     * @param Client $client
      * return \Illuminate\Http\Response
      */
     public function edit(Client $client)
     {
 
-        return view('clients.edit',compact('client'));
+        return view('clients.edit', compact('client'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * param  \Illuminate\Http\Request  $request
-     * @param  \App\Client  $client
+     * @param Client $client
      * return \Illuminate\Http\Response
      */
     public function update(Client $client, StoreClientRequest $request)
@@ -89,19 +87,19 @@ class ClientsController extends Controller
             'adress' => $request['adress']
         ]);
 
-        return redirect(route('clients.show',$client))->with('success', 'Client updated!');
+        return redirect(route('clients.show', $client))->with('success', 'Client updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Client  $client
+     * @param Client $client
      * return \Illuminate\Http\Response
      */
     public function destroy(Client $client)
     {
 
-        $this->authorize('admin',$client);
+        $this->authorize('admin', $client);
         $client->delete();
 
         return redirect(route('clients.index'))->with('success', 'Client deleted!');
